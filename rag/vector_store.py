@@ -1,4 +1,3 @@
-# rag/vector_store.py
 import logging
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, delete
