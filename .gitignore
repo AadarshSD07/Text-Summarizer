@@ -1,0 +1,25 @@
+# Virtual environment (regenerable, not source code)
+.venv/
+
+# Secrets — the most important line in this file
+.env
+
+# Python bytecode cache (auto-generated, not source)
+__pycache__/
+*.pyc
+*.pyo
+
+# Output files (generated artifacts, not source)
+output/
+
+# OS/editor noise
+.DS_Store
+.vscode/
+.idea/
+*.log
+
+# External files
+.coverage
+texts/
+rag/
+text_summarizer.egg-info

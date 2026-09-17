@@ -1,0 +1,64 @@
+[project]
+# The package name — what appears in `pip list`
+name = "text-summarizer"
+
+# Semantic versioning: MAJOR.MINOR.PATCH
+# 0.x.x = pre-release / in development
+version = "0.1.0"
+
+description = "CLI tool to summarize .txt files using a local LLM"
+
+# Prevents accidental install on old Python versions
+# f-strings, walrus operator, match statements need 3.10+
+requires-python = ">=3.10"
+
+dependencies = [
+    # The official OpenAI Python SDK.
+    # Also works with any OpenAI-compatible server (Ollama, Groq, etc.)
+    # via the base_url parameter.
+    "openai>=1.0.0",
+
+    # Reads .env files and injects them into os.environ at startup.
+    # Without this, you'd have to export variables manually each session.
+    "python-dotenv>=1.0",
+
+    # OpenAI's tokenizer library. Lets us count tokens *before* sending
+    # a request — essential for cost awareness and avoiding context limits.
+    "tiktoken>=0.7",
+
+    # Terminal formatting library: colors, spinners, tables, progress bars.
+    # Makes your CLI look professional. Optional for functionality.
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+# Install with: pip install -e ".[dev]"
+# Separating dev deps means production installs stay lean
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",     # Coverage reports
+]
+
+[project.scripts]
+# Creates a `summarize` command when installed.
+# Format: "command-name" = "package.module:function"
+# After `pip install -e .`, typing `summarize` in the terminal
+# calls the main() function in summarizer/cli.py
+summarize = "summarizer.cli:main"
+
+[tool.pytest.ini_options]
+# Where pytest looks for tests
+testpaths = ["tests"]
+# Verbose output by default
+addopts = "-v"
+# Show local variables in tracebacks — invaluable for debugging
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+
+[build-system]
+# Tells pip which tool to use to build/install this package
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["summarizer*"]
