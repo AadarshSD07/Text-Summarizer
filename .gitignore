@@ -21,5 +21,4 @@ output/
 # External files
 .coverage
 texts/
-rag/
 text_summarizer.egg-info
